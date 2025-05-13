@@ -1,19 +1,72 @@
 from unittest import TestCase
 
-from src.refinedoc.enumeration import TargetedPart
 from src.refinedoc.refined_document import RefinedDocument
 
 
 class TestRefinedDocument(TestCase):
 
     def test__compare(self):
-        self.fail()
+        rd = RefinedDocument(content=[])
+        self.assertEqual(1.0, rd._compare("same", "same"))
+        self.assertEqual(1.0, rd._compare("same 0", "same 1"))
+        self.assertLess(rd._compare("same", "very diferrent sentence"), 0.5)
+
+        rd.ratio_speed = 2
+        self.assertEqual(1.0, rd._compare("same", "same"))
+        self.assertLess(rd._compare("same", "very different sentence"), 0.5)
+
+        rd.ratio_speed = 3
+        self.assertEqual(1.0, rd._compare("same", "same"))
+        self.assertLess(rd._compare("same", "very different sentence"), 0.5)
+
+        rd.ratio_speed = 4
+        with self.assertRaises(ValueError):
+            rd._compare("same", "same")
 
     def test__compare_candidates(self):
-        self.fail()
+        rd = RefinedDocument(content=[])
+        self.assertEqual(
+            rd._compare_candidates(
+                to_compare_candidates=["same", "same", "same"], from_compare="same"
+            ),
+            1.0,
+        )
+        self.assertLess(
+            rd._compare_candidates(
+                to_compare_candidates=[
+                    "very different sentence",
+                    "lorem ipsum",
+                    "there is lot of different things to test",
+                ],
+                from_compare="same",
+            ),
+            0.5,
+        )
 
     def test__detect_similar_lines(self):
-        self.fail()
+        rd = RefinedDocument(content=[])
+        dsl = rd._detect_similar_lines(
+            candidates=[
+                "header 2",
+                "subheader 2",
+                "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+            ],
+            positional_weights=[1.0, 0.75, 0.5],
+            local_neighbours=[
+                [
+                    "header 3",
+                    "subheader 3",
+                    "ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+                ],
+                [
+                    "header 4",
+                    "subheader 4",
+                    "duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur",
+                ],
+            ],
+        )
+
+        self.assertListEqual(dsl, ["header 2", "subheader 2"])
 
     def test_header(self):
         page0 = ["header 0", " lorem ipsum dolor sit amet"]
