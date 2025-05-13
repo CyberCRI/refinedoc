@@ -184,7 +184,7 @@ class RefinedDocument:
         if targeted_part == TargetedPart.HEADER:
             self._processed_headers = identified_headers_footers
         elif targeted_part == TargetedPart.FOOTER:
-            self._process_footer = identified_headers_footers
+            self._processed_footers = identified_headers_footers
         else:
             raise NotImplemented("Value used for targeted part is not usable here")
 
