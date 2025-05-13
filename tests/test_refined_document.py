@@ -64,30 +64,35 @@ class TestRefinedDocument(TestCase):
                 self.assertEqual(f"subheader {i}", header[-1])
 
     def test_separate_footer(self):
-        page0 = ["lorem ipsum dolor sit amet", "", "footer 0"]
-        page1 = ["consectetur adipiscing elit", "", "footer 1"]
+        page0 = ["lorem ipsum dolor sit amet", "conescturs", "", "footer 0"]
+        page1 = ["consectetur adipiscing elit", "blablabla", "", "footer 1"]
         page2 = [
             "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+            "sud flu bla blu bli",
             "surfooter 2",
             "footer 2",
         ]
         page3 = [
             "ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+            "such a test wololo",
             "surfooter 3",
             "footer 3",
         ]
         page4 = [
             "duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur",
+            "unitest are annoying",
             "surfooter 4",
             "footer 4",
         ]
         page5 = [
             "excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum",
+            "just here for the test",
             "surfooter 5",
             "",
         ]
         page6 = [
             "sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium",
+            "always the same",
             "surfooter 6",
             "footer 6",
         ]
@@ -101,9 +106,10 @@ class TestRefinedDocument(TestCase):
             page6,
         ]
         rd = RefinedDocument(content=content)
-        content, footers = rd._separate_header_footer(targeted_part=TargetedPart.FOOTER)
+        footers = rd.footers
         pages_with_footer = [0, 1, 2, 3, 4, 6]
         pages_with_subfooter = [2, 3, 4, 5, 6]
+
         for i, footer in enumerate(footers):
             if i in pages_with_footer:
                 self.assertEqual(f"footer {i}", footer[-1])
