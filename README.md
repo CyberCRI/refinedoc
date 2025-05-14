@@ -1,7 +1,8 @@
 # Refinedoc
-Python library for post-extraction refinement of text that may be derived from PDF extraction.
+Python library for post-extraction refinement of text that may be derived from PDF extraction by [the Learning Planet Institute.](https://www.learningplanetinstitute.org/) 
 
 [![PyPI version](https://badge.fury.io/py/refinedoc.svg?icon=si%3Apython)](https://badge.fury.io/py/refinedoc)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 ## Why using Refinedoc ?
 The idea behind this library is to enable post-extraction processing of unstructured text content, the best-known example being pdf files. 
@@ -65,9 +66,6 @@ body = rd.body
 My work is based on this paper : [Lin, Xiaofan. (2003). Header and Footer Extraction by Page-Association. 5010. 164-171. 10.1117/12.472833. ](https://www.researchgate.net/publication/221253782_Header_and_Footer_Extraction_by_Page-Association)
 
 And an [article medium by Hussain Shahbaz Khawaja](https://medium.com/@hussainshahbazkhawaja/paper-implementation-header-and-footer-extraction-by-page-association-3a499b2552ae).
-
-## Going further
-
 
 # License
 This projects is licensed under Apache 2.0 License - see the [LICENSE](LICENSE) file for details.
