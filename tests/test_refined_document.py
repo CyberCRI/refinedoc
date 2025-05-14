@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from src.refinedoc.refined_document import RefinedDocument
+from refinedoc.refined_document import RefinedDocument
 
 
 class TestRefinedDocument(TestCase):

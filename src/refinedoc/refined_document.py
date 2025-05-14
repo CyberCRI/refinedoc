@@ -3,8 +3,8 @@ from collections import namedtuple
 from difflib import SequenceMatcher
 from statistics import mean
 
-from src.refinedoc.enumeration import TargetedPart
-from src.refinedoc.helpers import generate_weights, unify_list_len
+from refinedoc.enumeration import TargetedPart
+from refinedoc.helpers import generate_weights, unify_list_len
 
 logger = logging.getLogger(__name__)
 
