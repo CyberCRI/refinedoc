@@ -133,16 +133,16 @@ class RefinedDocument:
     def _separate_header_footer(
         self, targeted_part: TargetedPart, candidate_quantity: int = 5
     ):
-        if len(self._processed_body) < candidate_quantity * 2:
-            candidate_quantity = len(self._processed_body) // 2
-            logger.warning(
-                f"Candidate quantity is too high for the document. Set to {candidate_quantity}"
-            )
 
         pages: list[list[str]] = self._processed_body
         header_footer_candidates = []
 
         for page_content in pages:
+            if len(page_content) < candidate_quantity * 2:
+                candidate_quantity = len(self._processed_body) // 2
+                logger.warning(
+                    f"Candidate quantity is too high for the document. Set to {candidate_quantity}"
+                )
             if targeted_part == TargetedPart.HEADER:
                 header_footer_candidates.append(page_content[:candidate_quantity])
             elif targeted_part == TargetedPart.FOOTER:
