@@ -1,0 +1,23 @@
+[build-system]
+requires = ["hatchling >= 1.26"]
+build-backend = "hatchling.build"
+
+[project]
+name = "refinedoc"
+version = "0.0.2"
+authors = [
+  { name="Théo NARDIN", email="theo.nardin@learningplanetinstitute.org" },
+]
+description = "Python library for post-extraction refinement of text that may be derived from PDF extraction."
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "Apache-2.0"
+license-files = ["LICEN[CS]E*"]
+
+[project.urls]
+Homepage = "https://github.com/CyberCRI/refinedoc"
+Issues = "https://github.com/CyberCRI/refinedoc/issues"
