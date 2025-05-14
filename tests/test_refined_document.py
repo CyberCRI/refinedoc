@@ -168,3 +168,66 @@ class TestRefinedDocument(TestCase):
                 self.assertEqual(f"footer {i}", footer[-1])
             if i in pages_with_subfooter:
                 self.assertEqual(f"surfooter {i}", footer[0])
+
+    def test_refine_text(self):
+        document = [
+            [
+                "header 1",
+                "subheader 1",
+                "lorem ipsum dolor sit amet",
+                "consectetur adipiscing elit",
+                "footer 1",
+            ],
+            [
+                "header 2",
+                "subheader 2",
+                "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                "footer 2",
+            ],
+            [
+                "header 3",
+                "subheader 3",
+                "ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+                "footer 3",
+            ],
+            [
+                "header 4",
+                "subheader 4",
+                "duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur",
+                "footer 4",
+            ],
+        ]
+
+        rd = RefinedDocument(content=document)
+        h_dr = rd.headers
+        f_dr = rd.footers
+        b_dr = rd.body
+
+        h_ref = [
+            ["header 1", "subheader 1"],
+            ["header 2", "subheader 2"],
+            ["header 3", "subheader 3"],
+            ["header 4", "subheader 4"],
+        ]
+
+        f_ref = [
+            ["footer 1"],
+            ["footer 2"],
+            ["footer 3"],
+            ["footer 4"],
+        ]
+
+        b_ref = [
+            ["lorem ipsum dolor sit amet", "consectetur adipiscing elit"],
+            ["sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"],
+            [
+                "ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"
+            ],
+            [
+                "duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"
+            ],
+        ]
+
+        self.assertListEqual(h_dr, h_ref)
+        self.assertListEqual(f_dr, f_ref)
+        self.assertListEqual(b_dr, b_ref)
