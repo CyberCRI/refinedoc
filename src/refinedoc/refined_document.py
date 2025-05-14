@@ -14,7 +14,13 @@ RefinedDocumentContent = namedtuple(
 
 
 class RefinedDocument:
-    def __init__(self, content: list[list[str]], ratio_speed: int = 1):
+    def __init__(self, content: list[list[str]], ratio_speed: int = 1, win: int = 8):
+        """
+        RefinedDocument constructor
+        :param content: Document content to be refined
+        :param ratio_speed: Speed of the ratio comparison. 1 is the slowest and 3 is the fastest.
+        :param win: Window size for header/footer detection. Default is 8.
+        """
         if not isinstance(content, list):
             raise TypeError(
                 f"RefinedDocument content must be list[list[str]], actual type {type(content)}"
@@ -35,7 +41,7 @@ class RefinedDocument:
         self._processed_headers: list[list[str]] | None = None
         self._processed_footers: list[list[str]] | None = None
 
-        self.win = 8
+        self.win = win
 
     @property
     def content(self):
@@ -127,6 +133,12 @@ class RefinedDocument:
     def _separate_header_footer(
         self, targeted_part: TargetedPart, candidate_quantity: int = 5
     ):
+        if len(self._processed_body) < candidate_quantity * 2:
+            candidate_quantity = len(self._processed_body) // 2
+            logger.warning(
+                f"Candidate quantity is too high for the document. Set to {candidate_quantity}"
+            )
+
         pages: list[list[str]] = self._processed_body
         header_footer_candidates = []
 
@@ -150,12 +162,6 @@ class RefinedDocument:
                 )
             ]
             local_neighbours = down_part + upper_part
-
-            # local_neighbours = header_footer_candidates[
-            #     max(page_index - self.win, 1) : min(
-            #         page_index + self.win, len(header_footer_candidates)
-            #     )
-            # ]
 
             if targeted_part == TargetedPart.HEADER:
                 unify_list_len(local_neighbours)
