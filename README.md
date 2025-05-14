@@ -19,7 +19,45 @@ pip install refinedoc
 ```
 ### Example
 ```python
+from refinedoc.refined_document import RefinedDocument
 
+document = [
+            [
+                "header 1",
+                "subheader 1",
+                "lorem ipsum dolor sit amet",
+                "consectetur adipiscing elit",
+                "footer 1",
+            ],
+            [
+                "header 2",
+                "subheader 2",
+                "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                "footer 2",
+            ],
+            [
+                "header 3",
+                "subheader 3",
+                "ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+                "footer 3",
+            ],
+            [
+                "header 4",
+                "subheader 4",
+                "duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur",
+                "footer 4",
+            ],
+        ]
+
+rd = RefinedDocument(content=document)
+headers = rd.headers
+# [["header 1", "subheader 1"], ["header 2", "subheader 2"], ["header 3", "subheader 3"], ["header 4", "subheader 4"]]
+
+footers = rd.footers
+# [["footer 1"], ["footer 2"], ["footer 3"], ["footer 4"]]
+
+body = rd.body
+# [["lorem ipsum dolor sit amet", "consectetur adipiscing elit"], ["sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"], ["ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"], ["duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"]]
 ```
 
 ## How it's work
@@ -27,3 +65,9 @@ pip install refinedoc
 My work is based on this paper : [Lin, Xiaofan. (2003). Header and Footer Extraction by Page-Association. 5010. 164-171. 10.1117/12.472833. ](https://www.researchgate.net/publication/221253782_Header_and_Footer_Extraction_by_Page-Association)
 
 And an [article medium by Hussain Shahbaz Khawaja](https://medium.com/@hussainshahbazkhawaja/paper-implementation-header-and-footer-extraction-by-page-association-3a499b2552ae).
+
+## Going further
+
+
+# License
+This projects is licensed under Apache 2.0 License - see the [LICENSE](LICENSE) file for details.
