@@ -293,7 +293,7 @@ class TestRefinedDocument(TestCase):
         self.assertListEqual(f_dr, f_ref)
         self.assertListEqual(b_dr, b_ref)
 
-    def test_vrious_qty_lines2(self):
+    def test_various_qty_lines2(self):
         document = [
             [
                 "lorem ipsum dolor sit amet",
