@@ -116,6 +116,57 @@ class TestRefinedDocument(TestCase):
             if i in pages_with_subheader:
                 self.assertEqual(f"subheader {i}", header[-1])
 
+    def test_header_roman_numerals(self):
+        page0 = ["header 0", " lorem ipsum dolor sit amet"]
+        page1 = ["header I", " consectetur adipiscing elit"]
+        page2 = [
+            "header II",
+            "subheader II",
+            "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+        ]
+        page3 = [
+            "header III",
+            "subheader III",
+            "ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+        ]
+        page4 = [
+            "header IV",
+            "subheader IV",
+            "duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur",
+        ]
+        page5 = [
+            "",
+            "subheader V",
+            "excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum",
+        ]
+        page6 = [
+            "header VI",
+            "subheader VI",
+            "sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium",
+        ]
+        content = [
+            page0,
+            page1,
+            page2,
+            page3,
+            page4,
+            page5,
+            page6,
+        ]
+        rd = RefinedDocument(content=content)
+        headers = rd.headers
+
+        for i, header in enumerate(headers):
+            if i == 2:
+                self.assertEqual("header II", header[0])
+
+            if i == 3:
+                self.assertEqual("header III", header[0])
+            if i == 4:
+                self.assertEqual("header IV", header[0])
+            if i == 6:
+                self.assertEqual("header VI", header[0])
+
     def test_separate_footer(self):
         page0 = ["lorem ipsum dolor sit amet", "conescturs", "", "footer 0"]
         page1 = ["consectetur adipiscing elit", "blablabla", "", "footer 1"]

@@ -7,6 +7,7 @@ from refinedoc.enumeration import TargetedPart
 from refinedoc.helpers import (
     generate_weights,
     neutralize_arabic_numerals,
+    neutralize_roman_numerals,
     unify_list_len,
 )
 
@@ -80,10 +81,13 @@ class RefinedDocument:
             self._separate_header_footer(TargetedPart.FOOTER)
 
     def _compare(self, from_compare: str, to_compare_candidate: str):
-
         # Handle page number by replacing it
-        from_compare = neutralize_arabic_numerals(from_compare).lower()
-        to_compare_candidate = neutralize_arabic_numerals(to_compare_candidate).lower()
+        from_compare = neutralize_roman_numerals(
+            neutralize_arabic_numerals(from_compare)
+        ).lower()
+        to_compare_candidate = neutralize_roman_numerals(
+            neutralize_arabic_numerals(to_compare_candidate)
+        ).lower()
         s = SequenceMatcher(None, from_compare, to_compare_candidate)
 
         if self.ratio_speed == 1:
