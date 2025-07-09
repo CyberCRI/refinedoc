@@ -4,7 +4,11 @@ from difflib import SequenceMatcher
 from statistics import mean
 
 from refinedoc.enumeration import TargetedPart
-from refinedoc.helpers import generate_weights, unify_list_len
+from refinedoc.helpers import (
+    generate_weights,
+    neutralize_arabic_numerals,
+    unify_list_len,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -78,11 +82,8 @@ class RefinedDocument:
     def _compare(self, from_compare: str, to_compare_candidate: str):
 
         # Handle page number by replacing it
-        digits = "0123456789"
-        map_trans = str.maketrans(digits, "@" * len(digits))
-
-        from_compare = from_compare.translate(map_trans).lower()
-        to_compare_candidate = to_compare_candidate.translate(map_trans).lower()
+        from_compare = neutralize_arabic_numerals(from_compare).lower()
+        to_compare_candidate = neutralize_arabic_numerals(to_compare_candidate).lower()
         s = SequenceMatcher(None, from_compare, to_compare_candidate)
 
         if self.ratio_speed == 1:
