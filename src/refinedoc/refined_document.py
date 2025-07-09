@@ -124,9 +124,14 @@ class RefinedDocument:
                     * positional_weights[line_index]
                 )
             except IndexError as e:
-                logger.info("")
-                score = positional_weights[line_index]
-            if score >= 0.5:
+                if line_index >= len(positional_weights):
+                    logger.warning(
+                        f"Line index {line_index} is out of bounds for positional weights of length {len(positional_weights)}"
+                    )
+                    score = 0
+                else:
+                    score = positional_weights[line_index]
+            if candidate and score >= 0.5:
                 detected.append(candidate)
         return detected
 
