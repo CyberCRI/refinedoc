@@ -231,3 +231,64 @@ class TestRefinedDocument(TestCase):
         self.assertListEqual(h_dr, h_ref)
         self.assertListEqual(f_dr, f_ref)
         self.assertListEqual(b_dr, b_ref)
+
+    def test_vrious_qty_lines(self):
+        document = [
+            [
+                "header 1",
+                "subheader 1",
+                "lorem ipsum dolor sit amet",
+                "consectetur adipiscing elit",
+                "footer 1",
+            ],
+            [
+                "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+            ],
+            [
+                "ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+            ],
+            [
+                "duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur",
+            ],
+        ]
+
+        rd = RefinedDocument(content=document)
+
+        h_dr = rd.headers
+        f_dr = rd.footers
+        b_dr = rd.body
+
+        h_ref = [
+            [],
+            [],
+            [],
+            [],
+        ]
+
+        f_ref = [
+            [],
+            [],
+            [],
+            [],
+        ]
+
+        b_ref = [
+            [
+                "header 1",
+                "subheader 1",
+                "lorem ipsum dolor sit amet",
+                "consectetur adipiscing elit",
+                "footer 1",
+            ],
+            ["sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"],
+            [
+                "ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"
+            ],
+            [
+                "duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"
+            ],
+        ]
+
+        self.assertListEqual(h_dr, h_ref)
+        self.assertListEqual(f_dr, f_ref)
+        self.assertListEqual(b_dr, b_ref)
