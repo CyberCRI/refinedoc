@@ -1,6 +1,7 @@
 name: Publish Python 🐍 distribution 📦 to PyPI and TestPyPI
 
-on: push
+on:
+  push
 
 jobs:
   build:
@@ -28,6 +29,25 @@ jobs:
       with:
         name: python-package-distributions
         path: dist/
+
+  test:
+    name: Run tests
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        persist-credentials: false
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.x"
+    - name: Run tests
+      env:
+        PYTHONPATH: ${{ github.workspace }} # Ensure the current workspace is in the PYTHONPATH
+      run: python3 -m unittest discover tests/
+
+
   publish-to-pypi:
     name: >-
       Publish Python 🐍 distribution 📦 to PyPI
