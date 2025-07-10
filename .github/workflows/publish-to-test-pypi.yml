@@ -44,7 +44,7 @@ jobs:
         python-version: "3.x"
     - name: Run tests
       env:
-        PYTHONPATH: ${{ github.workspace }} # Ensure the current workspace is in the PYTHONPATH
+        PYTHONPATH: src
       run: python3 -m unittest discover tests/
 
 
