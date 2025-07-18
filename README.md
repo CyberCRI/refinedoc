@@ -1,5 +1,5 @@
 # Refinedoc
-Python library for post-extraction refinement of text that may be derived from PDF extraction by [the Learning Planet Institute.](https://www.learningplanetinstitute.org/) 
+ Python library for extracting headers, footers and body from PDF post parsing file by [the Learning Planet Institute.](https://www.learningplanetinstitute.org/) 
 
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
