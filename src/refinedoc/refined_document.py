@@ -43,7 +43,8 @@ class RefinedDocument:
             raise ValueError(f"Speed must be between 1 and 3: {ratio_speed}")
 
         self._processed_body: list[list[str]] = content  # Initialize body field
-
+        if len(content) == 1:
+            logger.warning(
                 "The content provided has only one page. Headers and footers will be set to empty lists."
             )
             self._processed_headers = [[]]
