@@ -404,3 +404,57 @@ class TestRefinedDocument(TestCase):
         self.assertListEqual(h_dr, h_ref)
         self.assertListEqual(f_dr, f_ref)
         self.assertListEqual(b_dr, b_ref)
+
+    def test_empty_document(self):
+        document = []
+
+        rd = RefinedDocument(content=document)
+
+        h_dr = rd.headers
+        f_dr = rd.footers
+        b_dr = rd.body
+
+        h_ref = []
+
+        f_ref = []
+
+        b_ref = []
+
+        self.assertListEqual(h_dr, h_ref)
+        self.assertListEqual(f_dr, f_ref)
+        self.assertListEqual(b_dr, b_ref)
+
+    def test_single_page_document(self):
+        document = [
+            [
+                "header 1",
+                "subheader 1",
+                "lorem ipsum dolor sit amet",
+                "consectetur adipiscing elit",
+                "footer 1",
+            ]
+        ]
+
+        rd = RefinedDocument(content=document)
+
+        h_dr = rd.headers
+        f_dr = rd.footers
+        b_dr = rd.body
+
+        h_ref = [[]]
+
+        f_ref = [[]]
+
+        b_ref = [
+            [
+                "header 1",
+                "subheader 1",
+                "lorem ipsum dolor sit amet",
+                "consectetur adipiscing elit",
+                "footer 1",
+            ]
+        ]
+
+        self.assertListEqual(h_dr, h_ref)
+        self.assertListEqual(f_dr, f_ref)
+        self.assertListEqual(b_dr, b_ref)
