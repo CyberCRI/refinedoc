@@ -1,7 +1,7 @@
 # Refinedoc
  Python library for extracting headers, footers and body from PDF post parsing file by [the Learning Planet Institute.](https://www.learningplanetinstitute.org/) 
 
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black) [![PyPI Downloads](https://static.pepy.tech/personalized-badge/refinedoc?period=total&units=INTERNATIONAL_SYSTEM&left_color=ORANGE&right_color=GREEN&left_text=downloads)](https://pepy.tech/projects/refinedoc)
 
 ## Table of Contents
 
