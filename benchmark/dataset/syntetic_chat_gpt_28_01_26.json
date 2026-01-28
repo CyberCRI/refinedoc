@@ -1,0 +1,1223 @@
+[
+  {
+    "id": "doc_001_scientific_article_running_header_footer",
+    "meta": {
+      "domain": "scientific_article",
+      "language": "en",
+      "notes": [
+        "Running header varies by section (Introduction/Methods/Results)",
+        "Footer has 'Preprint' + page numbering",
+        "First page has no running header; last page has 'References' running header",
+        "Hyphenation and ligatures-like tokens included"
+      ]
+    },
+    "document": [
+      [
+        "A Lightweight Method for Header/Footer Removal in Native PDFs",
+        "Alice Martin, Benoît Dubois, Chloé Nguyen",
+        "January 2026",
+        "Abstract",
+        "We present a simple approach for removing repeating headers and footers from",
+        "native PDF text streams without OCR.",
+        "1  Introduction",
+        "Document cleaning is a prerequisite for reliable downstream processing.",
+        "Many PDFs embed running headers, page numbers, and legal notices."
+      ],
+      [
+        "A Lightweight Method for Header/Footer Removal in Native PDFs",
+        "Introduction",
+        "2",
+        "Document cleaning is a prerequisite for reliable downstream processing.",
+        "However, text extraction yields line breaks that differ across pages.",
+        "We aim to detect repeating patterns near the top and bottom of pages.",
+        "Edge cases include section titles in the header area and split footers.",
+        "Preprint — not peer reviewed",
+        "Page 2 of 9"
+      ],
+      [
+        "A Lightweight Method for Header/Footer Removal in Native PDFs",
+        "Introduction",
+        "3",
+        "Our method relies on similarity across pages with tolerance to small edits.",
+        "We normalize whitespace, punctuation, and common numbering formats.",
+        "In practice, the same footer may appear as “Page 3/9” or “Page 3 of 9”.",
+        "We also handle hyphenated line wraps such as “docu-” then “ment”.",
+        "Preprint — not peer reviewed",
+        "Page 3/9"
+      ],
+      [
+        "A Lightweight Method for Header/Footer Removal in Native PDFs",
+        "Methods",
+        "4",
+        "We represent each page as a list of lines produced by a PDF extractor.",
+        "Then we score candidate header/footer lines based on recurrence.",
+        "To avoid removing real content, we treat section headings carefully.",
+        "We evaluate with synthetic and real-world corpora.",
+        "Preprint — not peer reviewed",
+        "Page 4 of 9"
+      ],
+      [
+        "A Lightweight Method for Header/Footer Removal in Native PDFs",
+        "Methods",
+        "5",
+        "Implementation details: we compute n-gram overlap and edit distance.",
+        "We cap the number of header lines to prevent over-removal.",
+        "We also ignore one-off lines like “Submitted on 12 Jan 2026”.",
+        "The extracted text may include “ﬁ” instead of “fi” in ligatures.",
+        "Preprint — not peer reviewed",
+        "Page 5 of 9"
+      ],
+      [
+        "A Lightweight Method for Header/Footer Removal in Native PDFs",
+        "Results",
+        "6",
+        "On a corpus of 1,000 articles we remove >95% of boilerplate lines.",
+        "False positives occur when tables appear near the bottom margin.",
+        "We mitigate by checking for table-like patterns and short numeric rows.",
+        "We provide a reference implementation as open source.",
+        "Preprint — not peer reviewed",
+        "Page 6 of 9"
+      ],
+      [
+        "A Lightweight Method for Header/Footer Removal in Native PDFs",
+        "Results",
+        "7",
+        "Ablations show normalization is crucial for matching “Page 7/9”.",
+        "We also test pages where the footer spans two lines occasionally.",
+        "The running header sometimes includes the section title, sometimes not.",
+        "Overall, our approach is robust across publishers.",
+        "Preprint — not peer reviewed",
+        "Page 7/9"
+      ],
+      [
+        "A Lightweight Method for Header/Footer Removal in Native PDFs",
+        "Discussion",
+        "8",
+        "We observe failures on documents with alternating even/odd headers.",
+        "Another failure mode is multi-column extraction that interleaves lines.",
+        "Future work: incorporate positional signals when available.",
+        "Discussion of limitations and ethical considerations.",
+        "Preprint — not peer reviewed",
+        "Page 8 of 9"
+      ],
+      [
+        "A Lightweight Method for Header/Footer Removal in Native PDFs",
+        "References",
+        "9",
+        "[1] Smith et al. Document parsing at scale.",
+        "[2] Doe et al. Layout-aware extraction.",
+        "[3] Martin et al. Similarity metrics for noisy text.",
+        "Preprint — not peer reviewed",
+        "Page 9 of 9"
+      ]
+    ],
+    "truth": {
+      "headers": [
+        ["A Lightweight Method for Header/Footer Removal in Native PDFs"],
+        ["A Lightweight Method for Header/Footer Removal in Native PDFs", "Introduction", "2"],
+        ["A Lightweight Method for Header/Footer Removal in Native PDFs", "Introduction", "3"],
+        ["A Lightweight Method for Header/Footer Removal in Native PDFs", "Methods", "4"],
+        ["A Lightweight Method for Header/Footer Removal in Native PDFs", "Methods", "5"],
+        ["A Lightweight Method for Header/Footer Removal in Native PDFs", "Results", "6"],
+        ["A Lightweight Method for Header/Footer Removal in Native PDFs", "Results", "7"],
+        ["A Lightweight Method for Header/Footer Removal in Native PDFs", "Discussion", "8"],
+        ["A Lightweight Method for Header/Footer Removal in Native PDFs", "References", "9"]
+      ],
+      "footers": [
+        [],
+        ["Preprint — not peer reviewed", "Page 2 of 9"],
+        ["Preprint — not peer reviewed", "Page 3/9"],
+        ["Preprint — not peer reviewed", "Page 4 of 9"],
+        ["Preprint — not peer reviewed", "Page 5 of 9"],
+        ["Preprint — not peer reviewed", "Page 6 of 9"],
+        ["Preprint — not peer reviewed", "Page 7/9"],
+        ["Preprint — not peer reviewed", "Page 8 of 9"],
+        ["Preprint — not peer reviewed", "Page 9 of 9"]
+      ],
+      "body": [
+        [
+          "A Lightweight Method for Header/Footer Removal in Native PDFs",
+          "Alice Martin, Benoît Dubois, Chloé Nguyen",
+          "January 2026",
+          "Abstract",
+          "We present a simple approach for removing repeating headers and footers from",
+          "native PDF text streams without OCR.",
+          "1  Introduction",
+          "Document cleaning is a prerequisite for reliable downstream processing.",
+          "Many PDFs embed running headers, page numbers, and legal notices."
+        ],
+        [
+          "Document cleaning is a prerequisite for reliable downstream processing.",
+          "However, text extraction yields line breaks that differ across pages.",
+          "We aim to detect repeating patterns near the top and bottom of pages.",
+          "Edge cases include section titles in the header area and split footers."
+        ],
+        [
+          "Our method relies on similarity across pages with tolerance to small edits.",
+          "We normalize whitespace, punctuation, and common numbering formats.",
+          "In practice, the same footer may appear as “Page 3/9” or “Page 3 of 9”.",
+          "We also handle hyphenated line wraps such as “docu-” then “ment”."
+        ],
+        [
+          "We represent each page as a list of lines produced by a PDF extractor.",
+          "Then we score candidate header/footer lines based on recurrence.",
+          "To avoid removing real content, we treat section headings carefully.",
+          "We evaluate with synthetic and real-world corpora."
+        ],
+        [
+          "Implementation details: we compute n-gram overlap and edit distance.",
+          "We cap the number of header lines to prevent over-removal.",
+          "We also ignore one-off lines like “Submitted on 12 Jan 2026”.",
+          "The extracted text may include “ﬁ” instead of “fi” in ligatures."
+        ],
+        [
+          "On a corpus of 1,000 articles we remove >95% of boilerplate lines.",
+          "False positives occur when tables appear near the bottom margin.",
+          "We mitigate by checking for table-like patterns and short numeric rows.",
+          "We provide a reference implementation as open source."
+        ],
+        [
+          "Ablations show normalization is crucial for matching “Page 7/9”.",
+          "We also test pages where the footer spans two lines occasionally.",
+          "The running header sometimes includes the section title, sometimes not.",
+          "Overall, our approach is robust across publishers."
+        ],
+        [
+          "We observe failures on documents with alternating even/odd headers.",
+          "Another failure mode is multi-column extraction that interleaves lines.",
+          "Future work: incorporate positional signals when available.",
+          "Discussion of limitations and ethical considerations."
+        ],
+        [
+          "[1] Smith et al. Document parsing at scale.",
+          "[2] Doe et al. Layout-aware extraction.",
+          "[3] Martin et al. Similarity metrics for noisy text."
+        ]
+      ]
+    }
+  },
+
+  {
+    "id": "doc_002_annual_report_even_odd_headers_multiline_footer",
+    "meta": {
+      "domain": "corporate_report",
+      "language": "fr",
+      "notes": [
+        "Odd/even headers differ",
+        "Footer includes confidentiality + page number, sometimes split on two lines",
+        "A page begins with a table caption that looks like a header but is body",
+        "One page has an inserted blank line"
+      ]
+    },
+    "document": [
+      [
+        "Groupe Exempli — Rapport annuel 2025",
+        "Direction Finance",
+        "Sommaire",
+        "1. Message du Président",
+        "2. Chiffres clés",
+        "3. Gouvernance",
+        "4. États financiers",
+        "Confidentiel — Diffusion restreinte",
+        "Page 1 / 8"
+      ],
+      [
+        "Rapport annuel 2025 — Groupe Exempli",
+        "Direction Finance",
+        "2  Chiffres clés",
+        "Le chiffre d'affaires progresse de 8,2% sur l'exercice.",
+        "EBITDA ajusté : 14,1 M€ ; Marge : 18,0%.",
+        "",
+        "Tableau 1 — Répartition par zone géographique",
+        "Confidentiel — Diffusion restreinte",
+        "Page 2 / 8"
+      ],
+      [
+        "Groupe Exempli — Rapport annuel 2025",
+        "Direction Finance",
+        "3  Gouvernance",
+        "Le Conseil d'administration s'est réuni 6 fois.",
+        "Comités : audit, rémunérations, RSE.",
+        "Les mandats et délégations sont décrits en annexe.",
+        "Confidentiel — Diffusion restreinte",
+        "Page 3 / 8"
+      ],
+      [
+        "Rapport annuel 2025 — Groupe Exempli",
+        "Direction Finance",
+        "4  États financiers",
+        "Compte de résultat consolidé (extrait) :",
+        "Produits : 78,4 M€",
+        "Charges : 64,3 M€",
+        "Résultat net : 9,2 M€",
+        "Confidentiel — Diffusion restreinte",
+        "Page 4 / 8"
+      ],
+      [
+        "Groupe Exempli — Rapport annuel 2025",
+        "Direction Finance",
+        "4.1  Notes annexes",
+        "Note 7 — Immobilisations corporelles",
+        "Les amortissements sont calculés en linéaire.",
+        "Note 8 — Provisions pour risques et charges",
+        "Confidentiel — Diffusion restreinte",
+        "Page 5 / 8"
+      ],
+      [
+        "Rapport annuel 2025 — Groupe Exempli",
+        "Direction Finance",
+        "4.2  Engagements hors bilan",
+        "Les engagements sont détaillés par nature et échéance.",
+        "Une attention particulière est portée aux garanties données.",
+        "Confidentiel — Diffusion restreinte",
+        "Page 6 / 8"
+      ],
+      [
+        "Groupe Exempli — Rapport annuel 2025",
+        "Direction Finance",
+        "Annexes",
+        "Glossaire : EBITDA, CAPEX, etc.",
+        "Méthodologie RSE : périmètre, hypothèses, limites.",
+        "Confidentiel — Diffusion restreinte",
+        "Page 7 / 8"
+      ],
+      [
+        "Rapport annuel 2025 — Groupe Exempli",
+        "Direction Finance",
+        "Mentions légales",
+        "© 2026 Groupe Exempli. Tous droits réservés.",
+        "Contact : finance@example.org",
+        "Confidentiel — Diffusion restreinte",
+        "Page 8 / 8"
+      ]
+    ],
+    "truth": {
+      "headers": [
+        ["Groupe Exempli — Rapport annuel 2025", "Direction Finance"],
+        ["Rapport annuel 2025 — Groupe Exempli", "Direction Finance"],
+        ["Groupe Exempli — Rapport annuel 2025", "Direction Finance"],
+        ["Rapport annuel 2025 — Groupe Exempli", "Direction Finance"],
+        ["Groupe Exempli — Rapport annuel 2025", "Direction Finance"],
+        ["Rapport annuel 2025 — Groupe Exempli", "Direction Finance"],
+        ["Groupe Exempli — Rapport annuel 2025", "Direction Finance"],
+        ["Rapport annuel 2025 — Groupe Exempli", "Direction Finance"]
+      ],
+      "footers": [
+        ["Confidentiel — Diffusion restreinte", "Page 1 / 8"],
+        ["Confidentiel — Diffusion restreinte", "Page 2 / 8"],
+        ["Confidentiel — Diffusion restreinte", "Page 3 / 8"],
+        ["Confidentiel — Diffusion restreinte", "Page 4 / 8"],
+        ["Confidentiel — Diffusion restreinte", "Page 5 / 8"],
+        ["Confidentiel — Diffusion restreinte", "Page 6 / 8"],
+        ["Confidentiel — Diffusion restreinte", "Page 7 / 8"],
+        ["Confidentiel — Diffusion restreinte", "Page 8 / 8"]
+      ],
+      "body": [
+        [
+          "Sommaire",
+          "1. Message du Président",
+          "2. Chiffres clés",
+          "3. Gouvernance",
+          "4. États financiers"
+        ],
+        [
+          "2  Chiffres clés",
+          "Le chiffre d'affaires progresse de 8,2% sur l'exercice.",
+          "EBITDA ajusté : 14,1 M€ ; Marge : 18,0%.",
+          "",
+          "Tableau 1 — Répartition par zone géographique"
+        ],
+        [
+          "3  Gouvernance",
+          "Le Conseil d'administration s'est réuni 6 fois.",
+          "Comités : audit, rémunérations, RSE.",
+          "Les mandats et délégations sont décrits en annexe."
+        ],
+        [
+          "4  États financiers",
+          "Compte de résultat consolidé (extrait) :",
+          "Produits : 78,4 M€",
+          "Charges : 64,3 M€",
+          "Résultat net : 9,2 M€"
+        ],
+        [
+          "4.1  Notes annexes",
+          "Note 7 — Immobilisations corporelles",
+          "Les amortissements sont calculés en linéaire.",
+          "Note 8 — Provisions pour risques et charges"
+        ],
+        [
+          "4.2  Engagements hors bilan",
+          "Les engagements sont détaillés par nature et échéance.",
+          "Une attention particulière est portée aux garanties données."
+        ],
+        [
+          "Annexes",
+          "Glossaire : EBITDA, CAPEX, etc.",
+          "Méthodologie RSE : périmètre, hypothèses, limites."
+        ],
+        [
+          "Mentions légales",
+          "© 2026 Groupe Exempli. Tous droits réservés.",
+          "Contact : finance@example.org"
+        ]
+      ]
+    }
+  },
+
+  {
+    "id": "doc_003_legal_contract_variable_first_page_header_signature_page",
+    "meta": {
+      "domain": "legal_contract",
+      "language": "fr",
+      "notes": [
+        "First page has a larger header block (parties + title) that should be body, not header",
+        "Subsequent pages have a short running header and footer with version/date",
+        "Signature page has no footer but has a 'SIGNATURES' heading near bottom"
+      ]
+    },
+    "document": [
+      [
+        "CONTRAT DE PRESTATION DE SERVICES",
+        "Entre : Société Alpha, 12 rue des Lilas, 75010 Paris",
+        "Et : Société Beta, 8 avenue de la République, 75011 Paris",
+        "Date : 15 janvier 2026",
+        "Préambule",
+        "Les Parties souhaitent définir les conditions de la prestation.",
+        "Article 1 — Objet",
+        "Le présent contrat a pour objet la fourniture de services de conseil.",
+        "Article 2 — Durée",
+        "Le contrat entre en vigueur à la date de signature pour 12 mois."
+      ],
+      [
+        "Contrat de prestation — Alpha / Beta",
+        "2",
+        "Article 3 — Prix",
+        "La rémunération est fixée à 12 000 € HT.",
+        "Les frais de déplacement sont refacturés sur justificatifs.",
+        "Article 4 — Confidentialité",
+        "Les informations échangées sont confidentielles.",
+        "Version v1.3 — 2026-01-15",
+        "Page 2/5"
+      ],
+      [
+        "Contrat de prestation — Alpha / Beta",
+        "3",
+        "Article 5 — Propriété intellectuelle",
+        "Les livrables demeurent la propriété de Beta jusqu'au paiement complet.",
+        "Article 6 — Résiliation",
+        "Chaque Partie peut résilier en cas de manquement substantiel.",
+        "Version v1.3 — 2026-01-15",
+        "Page 3/5"
+      ],
+      [
+        "Contrat de prestation — Alpha / Beta",
+        "4",
+        "Article 7 — Responsabilité",
+        "La responsabilité est limitée au montant des sommes versées.",
+        "Article 8 — Droit applicable",
+        "Le contrat est soumis au droit français.",
+        "Version v1.3 — 2026-01-15",
+        "Page 4/5"
+      ],
+      [
+        "Contrat de prestation — Alpha / Beta",
+        "5",
+        "SIGNATURES",
+        "Pour Société Alpha : ____________________",
+        "Pour Société Beta : _____________________",
+        "Fait à Paris, le 15 janvier 2026"
+      ]
+    ],
+    "truth": {
+      "headers": [
+        [],
+        ["Contrat de prestation — Alpha / Beta", "2"],
+        ["Contrat de prestation — Alpha / Beta", "3"],
+        ["Contrat de prestation — Alpha / Beta", "4"],
+        ["Contrat de prestation — Alpha / Beta", "5"]
+      ],
+      "footers": [
+        [],
+        ["Version v1.3 — 2026-01-15", "Page 2/5"],
+        ["Version v1.3 — 2026-01-15", "Page 3/5"],
+        ["Version v1.3 — 2026-01-15", "Page 4/5"],
+        []
+      ],
+      "body": [
+        [
+          "CONTRAT DE PRESTATION DE SERVICES",
+          "Entre : Société Alpha, 12 rue des Lilas, 75010 Paris",
+          "Et : Société Beta, 8 avenue de la République, 75011 Paris",
+          "Date : 15 janvier 2026",
+          "Préambule",
+          "Les Parties souhaitent définir les conditions de la prestation.",
+          "Article 1 — Objet",
+          "Le présent contrat a pour objet la fourniture de services de conseil.",
+          "Article 2 — Durée",
+          "Le contrat entre en vigueur à la date de signature pour 12 mois."
+        ],
+        [
+          "Article 3 — Prix",
+          "La rémunération est fixée à 12 000 € HT.",
+          "Les frais de déplacement sont refacturés sur justificatifs.",
+          "Article 4 — Confidentialité",
+          "Les informations échangées sont confidentielles."
+        ],
+        [
+          "Article 5 — Propriété intellectuelle",
+          "Les livrables demeurent la propriété de Beta jusqu'au paiement complet.",
+          "Article 6 — Résiliation",
+          "Chaque Partie peut résilier en cas de manquement substantiel."
+        ],
+        [
+          "Article 7 — Responsabilité",
+          "La responsabilité est limitée au montant des sommes versées.",
+          "Article 8 — Droit applicable",
+          "Le contrat est soumis au droit français."
+        ],
+        [
+          "SIGNATURES",
+          "Pour Société Alpha : ____________________",
+          "Pour Société Beta : _____________________",
+          "Fait à Paris, le 15 janvier 2026"
+        ]
+      ]
+    }
+  },
+
+  {
+    "id": "doc_004_slides_like_pdf_repeated_title_footer_date",
+    "meta": {
+      "domain": "presentation_export",
+      "language": "en",
+      "notes": [
+        "Slide-like pages: each page has a title line that is content (should be body), but appears at top and repeats style",
+        "Footer always has company + date; page number sometimes missing",
+        "One page has an empty body except bullets"
+      ]
+    },
+    "document": [
+      [
+        "Quarterly Business Review",
+        "Agenda",
+        "• KPIs overview",
+        "• Pipeline",
+        "• Risks & mitigations",
+        "Acme Corp — 2026-01-10",
+        "1"
+      ],
+      [
+        "Quarterly Business Review",
+        "KPIs overview",
+        "Revenue: €3.2M (+6%)",
+        "Gross margin: 41%",
+        "Churn: 2.1%",
+        "Acme Corp — 2026-01-10",
+        "2"
+      ],
+      [
+        "Quarterly Business Review",
+        "Pipeline",
+        "• Deal A — negotiation",
+        "• Deal B — discovery",
+        "• Deal C — closed-won",
+        "Acme Corp — 2026-01-10",
+        "3"
+      ],
+      [
+        "Quarterly Business Review",
+        "Risks & mitigations",
+        "• Hiring delay in Q1",
+        "• Vendor dependency",
+        "• Mitigation: dual-sourcing",
+        "Acme Corp — 2026-01-10"
+      ],
+      [
+        "Quarterly Business Review",
+        "Appendix",
+        "• Backup slide",
+        "• Definitions",
+        "Acme Corp — 2026-01-10",
+        "5"
+      ]
+    ],
+    "truth": {
+      "headers": [
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "footers": [
+        ["Acme Corp — 2026-01-10", "1"],
+        ["Acme Corp — 2026-01-10", "2"],
+        ["Acme Corp — 2026-01-10", "3"],
+        ["Acme Corp — 2026-01-10"],
+        ["Acme Corp — 2026-01-10", "5"]
+      ],
+      "body": [
+        [
+          "Quarterly Business Review",
+          "Agenda",
+          "• KPIs overview",
+          "• Pipeline",
+          "• Risks & mitigations"
+        ],
+        [
+          "Quarterly Business Review",
+          "KPIs overview",
+          "Revenue: €3.2M (+6%)",
+          "Gross margin: 41%",
+          "Churn: 2.1%"
+        ],
+        [
+          "Quarterly Business Review",
+          "Pipeline",
+          "• Deal A — negotiation",
+          "• Deal B — discovery",
+          "• Deal C — closed-won"
+        ],
+        [
+          "Quarterly Business Review",
+          "Risks & mitigations",
+          "• Hiring delay in Q1",
+          "• Vendor dependency",
+          "• Mitigation: dual-sourcing"
+        ],
+        [
+          "Quarterly Business Review",
+          "Appendix",
+          "• Backup slide",
+          "• Definitions"
+        ]
+      ]
+    }
+  },
+
+  {
+    "id": "doc_005_user_manual_headers_with_chapter_and_section_footnote_confusion",
+    "meta": {
+      "domain": "user_manual",
+      "language": "en",
+      "notes": [
+        "Header includes product name + chapter; changes when chapter changes",
+        "Footer includes support URL and page number",
+        "One page contains a short disclaimer near bottom that is body, not footer",
+        "Bullet lists and code-like lines included"
+      ]
+    },
+    "document": [
+      [
+        "WidgetPro 4.2 — User Manual",
+        "Chapter 1: Getting Started",
+        "1.1 Installation",
+        "To install WidgetPro, run the installer and follow the prompts.",
+        "System requirements:",
+        "• Windows 11 / macOS 14",
+        "• 8 GB RAM (16 GB recommended)",
+        "Support: support.example.com",
+        "Page 1"
+      ],
+      [
+        "WidgetPro 4.2 — User Manual",
+        "Chapter 1: Getting Started",
+        "1.2 Quick setup",
+        "1) Launch the app.",
+        "2) Create a workspace named “default”.",
+        "3) Paste your API key.",
+        "Example:",
+        "export WIDGETPRO_KEY=\"abc123\"",
+        "Support: support.example.com",
+        "Page 2"
+      ],
+      [
+        "WidgetPro 4.2 — User Manual",
+        "Chapter 2: Configuration",
+        "2.1 Settings file",
+        "The settings file is located at:",
+        "~/.config/widgetpro/config.yaml",
+        "Do not edit while the app is running.",
+        "Note: changes apply after restart.",
+        "Support: support.example.com",
+        "Page 3"
+      ],
+      [
+        "WidgetPro 4.2 — User Manual",
+        "Chapter 2: Configuration",
+        "2.2 Advanced options",
+        "Flags:",
+        "• --safe-mode",
+        "• --no-telemetry",
+        "• --cache-dir <path>",
+        "This section may contain sensitive defaults.",
+        "DISCLAIMER: This note is part of the body, not a footer.",
+        "Support: support.example.com",
+        "Page 4"
+      ],
+      [
+        "WidgetPro 4.2 — User Manual",
+        "Chapter 3: Troubleshooting",
+        "3.1 Common errors",
+        "Error: E042 — Missing license file",
+        "Fix: place license.dat in the installation directory.",
+        "If the issue persists, contact support.",
+        "Support: support.example.com",
+        "Page 5"
+      ]
+    ],
+    "truth": {
+      "headers": [
+        ["WidgetPro 4.2 — User Manual", "Chapter 1: Getting Started"],
+        ["WidgetPro 4.2 — User Manual", "Chapter 1: Getting Started"],
+        ["WidgetPro 4.2 — User Manual", "Chapter 2: Configuration"],
+        ["WidgetPro 4.2 — User Manual", "Chapter 2: Configuration"],
+        ["WidgetPro 4.2 — User Manual", "Chapter 3: Troubleshooting"]
+      ],
+      "footers": [
+        ["Support: support.example.com", "Page 1"],
+        ["Support: support.example.com", "Page 2"],
+        ["Support: support.example.com", "Page 3"],
+        ["Support: support.example.com", "Page 4"],
+        ["Support: support.example.com", "Page 5"]
+      ],
+      "body": [
+        [
+          "1.1 Installation",
+          "To install WidgetPro, run the installer and follow the prompts.",
+          "System requirements:",
+          "• Windows 11 / macOS 14",
+          "• 8 GB RAM (16 GB recommended)"
+        ],
+        [
+          "1.2 Quick setup",
+          "1) Launch the app.",
+          "2) Create a workspace named “default”.",
+          "3) Paste your API key.",
+          "Example:",
+          "export WIDGETPRO_KEY=\"abc123\""
+        ],
+        [
+          "2.1 Settings file",
+          "The settings file is located at:",
+          "~/.config/widgetpro/config.yaml",
+          "Do not edit while the app is running.",
+          "Note: changes apply after restart."
+        ],
+        [
+          "2.2 Advanced options",
+          "Flags:",
+          "• --safe-mode",
+          "• --no-telemetry",
+          "• --cache-dir <path>",
+          "This section may contain sensitive defaults.",
+          "DISCLAIMER: This note is part of the body, not a footer."
+        ],
+        [
+          "3.1 Common errors",
+          "Error: E042 — Missing license file",
+          "Fix: place license.dat in the installation directory.",
+          "If the issue persists, contact support."
+        ]
+      ]
+    }
+  },
+
+  {
+    "id": "doc_006_thesis_front_matter_roman_numerals_then_main_arabic",
+    "meta": {
+      "domain": "thesis",
+      "language": "fr",
+      "notes": [
+        "Front matter uses roman numerals in footer (i, ii, iii)",
+        "Main matter switches to arabic numbering (1..)",
+        "Running header changes from 'Résumé' to chapter titles",
+        "Some pages have no header (chapter opening)"
+      ]
+    },
+    "document": [
+      [
+        "Université Exemple — Département Informatique",
+        "Mémoire de Master",
+        "Titre : Extraction robuste d'information dans les PDF",
+        "Résumé",
+        "Ce mémoire propose une approche hybride pour nettoyer le texte extrait.",
+        "Mots-clés : PDF, en-têtes, pieds de page, extraction",
+        "Université Exemple — 2026",
+        "i"
+      ],
+      [
+        "Université Exemple — Département Informatique",
+        "Résumé",
+        "Ce mémoire est structuré en trois chapitres et une annexe.",
+        "Les résultats montrent un gain significatif sur des corpus réels.",
+        "Université Exemple — 2026",
+        "ii"
+      ],
+      [
+        "Université Exemple — Département Informatique",
+        "Table des matières",
+        "1 Introduction ........................................ 1",
+        "2 Méthodes ............................................. 5",
+        "3 Résultats ............................................. 12",
+        "Annexes ................................................ 18",
+        "Université Exemple — 2026",
+        "iii"
+      ],
+      [
+        "Extraction robuste d'information dans les PDF",
+        "Chapitre 1 — Introduction",
+        "1",
+        "La suppression des en-têtes et pieds de page est une étape cruciale.",
+        "Nous distinguons le contenu répétitif du contenu sémantique.",
+        "Les documents académiques alternent parfois les styles de pagination.",
+        "© Université Exemple — 2026",
+        "Page 1"
+      ],
+      [
+        "Extraction robuste d'information dans les PDF",
+        "Chapitre 1 — Introduction",
+        "2",
+        "Contributions :",
+        "• Un modèle de similarité tolérant aux variations",
+        "• Un protocole d'évaluation reproductible",
+        "La figure 1 présente l'architecture proposée.",
+        "© Université Exemple — 2026",
+        "Page 2"
+      ],
+      [
+        "Chapitre 2 — Méthodes",
+        "3",
+        "Nous formalisons le document comme une liste de pages et de lignes.",
+        "La normalisation gère les espaces, tirets et numéros de page.",
+        "Attention aux pages d'ouverture de chapitre sans en-tête courant.",
+        "© Université Exemple — 2026",
+        "Page 3"
+      ]
+    ],
+    "truth": {
+      "headers": [
+        ["Université Exemple — Département Informatique", "Mémoire de Master"],
+        ["Université Exemple — Département Informatique", "Résumé"],
+        ["Université Exemple — Département Informatique", "Table des matières"],
+        ["Extraction robuste d'information dans les PDF", "Chapitre 1 — Introduction", "1"],
+        ["Extraction robuste d'information dans les PDF", "Chapitre 1 — Introduction", "2"],
+        []
+      ],
+      "footers": [
+        ["Université Exemple — 2026", "i"],
+        ["Université Exemple — 2026", "ii"],
+        ["Université Exemple — 2026", "iii"],
+        ["© Université Exemple — 2026", "Page 1"],
+        ["© Université Exemple — 2026", "Page 2"],
+        ["© Université Exemple — 2026", "Page 3"]
+      ],
+      "body": [
+        [
+          "Titre : Extraction robuste d'information dans les PDF",
+          "Résumé",
+          "Ce mémoire propose une approche hybride pour nettoyer le texte extrait.",
+          "Mots-clés : PDF, en-têtes, pieds de page, extraction"
+        ],
+        [
+          "Ce mémoire est structuré en trois chapitres et une annexe.",
+          "Les résultats montrent un gain significatif sur des corpus réels."
+        ],
+        [
+          "1 Introduction ........................................ 1",
+          "2 Méthodes ............................................. 5",
+          "3 Résultats ............................................. 12",
+          "Annexes ................................................ 18"
+        ],
+        [
+          "La suppression des en-têtes et pieds de page est une étape cruciale.",
+          "Nous distinguons le contenu répétitif du contenu sémantique.",
+          "Les documents académiques alternent parfois les styles de pagination."
+        ],
+        [
+          "Contributions :",
+          "• Un modèle de similarité tolérant aux variations",
+          "• Un protocole d'évaluation reproductible",
+          "La figure 1 présente l'architecture proposée."
+        ],
+        [
+          "Chapitre 2 — Méthodes",
+          "Nous formalisons le document comme une liste de pages et de lignes.",
+          "La normalisation gère les espaces, tirets et numéros de page.",
+          "Attention aux pages d'ouverture de chapitre sans en-tête courant."
+        ]
+      ]
+    }
+  },
+
+  {
+    "id": "doc_007_invoice_statement_duplicate_totals_in_footer_like_region",
+    "meta": {
+      "domain": "invoice",
+      "language": "fr",
+      "notes": [
+        "Footer contains legal info (VAT, address) + page number",
+        "Some monetary totals appear at bottom and may look like footer but are body",
+        "Second page continues line items; header includes invoice number and client",
+        "Footer has a line that changes (IBAN last digits masked)"
+      ]
+    },
+    "document": [
+      [
+        "FACTURE",
+        "Société : Exempli SAS",
+        "Client : Mairie de Exempleville",
+        "N° Facture : F-2026-0017",
+        "Date : 20/01/2026",
+        "Désignation               Qté   PU HT    Total HT",
+        "Audit énergétique         1    2 000€    2 000€",
+        "Atelier formation         2      600€    1 200€",
+        "Total HT : 3 200€",
+        "TVA (20%) : 640€",
+        "Total TTC : 3 840€",
+        "Exempli SAS — 12 rue des Lilas, 75010 Paris — TVA FR12XXXX",
+        "RIB : IBAN FR76 **** **** **** **34",
+        "Page 1/2"
+      ],
+      [
+        "FACTURE",
+        "Société : Exempli SAS",
+        "Client : Mairie de Exempleville",
+        "N° Facture : F-2026-0017",
+        "Désignation               Qté   PU HT    Total HT",
+        "Support annuel            1      900€      900€",
+        "Déplacement               3      120€      360€",
+        "Sous-total page : 1 260€",
+        "Total TTC (rappel) : 3 840€",
+        "Exempli SAS — 12 rue des Lilas, 75010 Paris — TVA FR12XXXX",
+        "RIB : IBAN FR76 **** **** **** **78",
+        "Page 2/2"
+      ]
+    ],
+    "truth": {
+      "headers": [
+        [],
+        []
+      ],
+      "footers": [
+        ["Exempli SAS — 12 rue des Lilas, 75010 Paris — TVA FR12XXXX", "RIB : IBAN FR76 **** **** **** **34", "Page 1/2"],
+        ["Exempli SAS — 12 rue des Lilas, 75010 Paris — TVA FR12XXXX", "RIB : IBAN FR76 **** **** **** **78", "Page 2/2"]
+      ],
+      "body": [
+        [
+          "FACTURE",
+          "Société : Exempli SAS",
+          "Client : Mairie de Exempleville",
+          "N° Facture : F-2026-0017",
+          "Date : 20/01/2026",
+          "Désignation               Qté   PU HT    Total HT",
+          "Audit énergétique         1    2 000€    2 000€",
+          "Atelier formation         2      600€    1 200€",
+          "Total HT : 3 200€",
+          "TVA (20%) : 640€",
+          "Total TTC : 3 840€"
+        ],
+        [
+          "FACTURE",
+          "Société : Exempli SAS",
+          "Client : Mairie de Exempleville",
+          "N° Facture : F-2026-0017",
+          "Désignation               Qté   PU HT    Total HT",
+          "Support annuel            1      900€      900€",
+          "Déplacement               3      120€      360€",
+          "Sous-total page : 1 260€",
+          "Total TTC (rappel) : 3 840€"
+        ]
+      ]
+    }
+  },
+
+  {
+    "id": "doc_008_two_column_extraction_interleaved_lines_header_footer_constant",
+    "meta": {
+      "domain": "newsletter_two_column",
+      "language": "en",
+      "notes": [
+        "Simulates two-column extraction where lines interleave from left/right",
+        "Header constant: newsletter name + issue",
+        "Footer constant: copyright + page number",
+        "Body includes short repeated phrases that should not be treated as header/footer"
+      ]
+    },
+    "document": [
+      [
+        "City Newsletter — Issue 14",
+        "January 2026",
+        "1",
+        "Left: Community updates",
+        "Right: Upcoming events",
+        "Left: New library hours announced",
+        "Right: Jan 29 — Town hall meeting",
+        "Left: Roadworks on Elm Street",
+        "Right: Feb 02 — Recycling workshop",
+        "© City of Exampleton",
+        "Page 1"
+      ],
+      [
+        "City Newsletter — Issue 14",
+        "January 2026",
+        "2",
+        "Left: Community updates (cont.)",
+        "Right: Upcoming events (cont.)",
+        "Left: Roadworks on Elm Street (cont.)",
+        "Right: Feb 10 — Budget Q&A",
+        "Left: Short note: “Thank you!”",
+        "Right: Short note: “Thank you!”",
+        "© City of Exampleton",
+        "Page 2"
+      ],
+      [
+        "City Newsletter — Issue 14",
+        "January 2026",
+        "3",
+        "Left: Volunteer spotlight",
+        "Right: Local businesses",
+        "Left: Interview with Sam Taylor",
+        "Right: Café opens on Main Ave",
+        "Left: Quote: “Thank you!”",
+        "Right: Quote: “Thank you!”",
+        "© City of Exampleton",
+        "Page 3"
+      ]
+    ],
+    "truth": {
+      "headers": [
+        ["City Newsletter — Issue 14", "January 2026", "1"],
+        ["City Newsletter — Issue 14", "January 2026", "2"],
+        ["City Newsletter — Issue 14", "January 2026", "3"]
+      ],
+      "footers": [
+        ["© City of Exampleton", "Page 1"],
+        ["© City of Exampleton", "Page 2"],
+        ["© City of Exampleton", "Page 3"]
+      ],
+      "body": [
+        [
+          "Left: Community updates",
+          "Right: Upcoming events",
+          "Left: New library hours announced",
+          "Right: Jan 29 — Town hall meeting",
+          "Left: Roadworks on Elm Street",
+          "Right: Feb 02 — Recycling workshop"
+        ],
+        [
+          "Left: Community updates (cont.)",
+          "Right: Upcoming events (cont.)",
+          "Left: Roadworks on Elm Street (cont.)",
+          "Right: Feb 10 — Budget Q&A",
+          "Left: Short note: “Thank you!”",
+          "Right: Short note: “Thank you!”"
+        ],
+        [
+          "Left: Volunteer spotlight",
+          "Right: Local businesses",
+          "Left: Interview with Sam Taylor",
+          "Right: Café opens on Main Ave",
+          "Left: Quote: “Thank you!”",
+          "Right: Quote: “Thank you!”"
+        ]
+      ]
+    }
+  },
+
+  {
+    "id": "doc_009_book_chapter_headers_change_mid_document_footers_with_isbn",
+    "meta": {
+      "domain": "book_chapter",
+      "language": "en",
+      "notes": [
+        "Header alternates: left pages show book title, right pages show chapter title",
+        "Footer contains ISBN + page number; ISBN constant",
+        "Mid-document chapter changes and header text changes accordingly",
+        "A page contains only a figure caption near bottom (should remain body)"
+      ]
+    },
+    "document": [
+      [
+        "The Handbook of Document Processing",
+        "1",
+        "Chapter 3 — Cleaning Extracted Text",
+        "In this chapter, we discuss practical heuristics.",
+        "We start with normalization and then detect repetitive boilerplate.",
+        "ISBN 978-1-23456-789-0",
+        "Page 1"
+      ],
+      [
+        "Chapter 3 — Cleaning Extracted Text",
+        "2",
+        "We describe approaches for detecting running headers and page numbers.",
+        "A common pitfall is removing meaningful headings.",
+        "We propose safeguards and evaluation protocols.",
+        "ISBN 978-1-23456-789-0",
+        "Page 2"
+      ],
+      [
+        "The Handbook of Document Processing",
+        "3",
+        "Figure 3.1 — Example layout with margin notes",
+        "ISBN 978-1-23456-789-0",
+        "Page 3"
+      ],
+      [
+        "Chapter 4 — Evaluation",
+        "4",
+        "We now define metrics: precision, recall, and over-removal rate.",
+        "We recommend testing on multiple domains (reports, papers, manuals).",
+        "ISBN 978-1-23456-789-0",
+        "Page 4"
+      ]
+    ],
+    "truth": {
+      "headers": [
+        ["The Handbook of Document Processing", "1"],
+        ["Chapter 3 — Cleaning Extracted Text", "2"],
+        ["The Handbook of Document Processing", "3"],
+        ["Chapter 4 — Evaluation", "4"]
+      ],
+      "footers": [
+        ["ISBN 978-1-23456-789-0", "Page 1"],
+        ["ISBN 978-1-23456-789-0", "Page 2"],
+        ["ISBN 978-1-23456-789-0", "Page 3"],
+        ["ISBN 978-1-23456-789-0", "Page 4"]
+      ],
+      "body": [
+        [
+          "Chapter 3 — Cleaning Extracted Text",
+          "In this chapter, we discuss practical heuristics.",
+          "We start with normalization and then detect repetitive boilerplate."
+        ],
+        [
+          "We describe approaches for detecting running headers and page numbers.",
+          "A common pitfall is removing meaningful headings.",
+          "We propose safeguards and evaluation protocols."
+        ],
+        [
+          "Figure 3.1 — Example layout with margin notes"
+        ],
+        [
+          "We now define metrics: precision, recall, and over-removal rate.",
+          "We recommend testing on multiple domains (reports, papers, manuals)."
+        ]
+      ]
+    }
+  },
+
+  {
+    "id": "doc_010_meeting_minutes_repeated_stamp_top_and_bottom_watermark_like_lines",
+    "meta": {
+      "domain": "meeting_minutes",
+      "language": "fr",
+      "notes": [
+        "Top stamp repeats on every page and includes a timestamp that changes slightly",
+        "Bottom includes 'Document interne' and page number; sometimes missing on page 1",
+        "Body contains repeated phrase 'Décision:' which should not be treated as footer",
+        "One page has trailing empty lines and a short '—' line"
+      ]
+    },
+    "document": [
+      [
+        "COMMUNE D'EXEMPLEVILLE — COMPTE-RENDU",
+        "Séance du 12/01/2026 — 09:00",
+        "Objet : Comité énergie",
+        "Présents : A. Leroy, M. Petit, S. Karim",
+        "Ordre du jour",
+        "1) Suivi consommations",
+        "2) Plan d'action 2026",
+        "Décision: valider le calendrier des audits.",
+        "",
+        "—"
+      ],
+      [
+        "COMMUNE D'EXEMPLEVILLE — COMPTE-RENDU",
+        "Séance du 12/01/2026 — 09:03",
+        "2",
+        "1) Suivi consommations",
+        "Analyse des données : électricité -4%, gaz +2%.",
+        "Décision: lancer une campagne de sensibilisation.",
+        "2) Plan d'action 2026",
+        "Budget prévisionnel : 35 k€.",
+        "Document interne — Ne pas diffuser",
+        "Page 2"
+      ],
+      [
+        "COMMUNE D'EXEMPLEVILLE — COMPTE-RENDU",
+        "Séance du 12/01/2026 — 09:07",
+        "3",
+        "Actions",
+        "• Audit écoles (février)",
+        "• Réglage chaufferies (mars)",
+        "• Contrat maintenance (avril)",
+        "Décision: attribuer le lot 1 au prestataire X.",
+        "Document interne — Ne pas diffuser",
+        "Page 3"
+      ],
+      [
+        "COMMUNE D'EXEMPLEVILLE — COMPTE-RENDU",
+        "Séance du 12/01/2026 — 09:11",
+        "4",
+        "Annexe A — Participants",
+        "A. Leroy (élu), M. Petit (DSI), S. Karim (énergie)",
+        "Annexe B — Documents",
+        "• Relevés 2025",
+        "• Plan d'action 2026 v2",
+        "Document interne — Ne pas diffuser",
+        "Page 4"
+      ]
+    ],
+    "truth": {
+      "headers": [
+        [],
+        ["COMMUNE D'EXEMPLEVILLE — COMPTE-RENDU", "Séance du 12/01/2026 — 09:03", "2"],
+        ["COMMUNE D'EXEMPLEVILLE — COMPTE-RENDU", "Séance du 12/01/2026 — 09:07", "3"],
+        ["COMMUNE D'EXEMPLEVILLE — COMPTE-RENDU", "Séance du 12/01/2026 — 09:11", "4"]
+      ],
+      "footers": [
+        [],
+        ["Document interne — Ne pas diffuser", "Page 2"],
+        ["Document interne — Ne pas diffuser", "Page 3"],
+        ["Document interne — Ne pas diffuser", "Page 4"]
+      ],
+      "body": [
+        [
+          "COMMUNE D'EXEMPLEVILLE — COMPTE-RENDU",
+          "Séance du 12/01/2026 — 09:00",
+          "Objet : Comité énergie",
+          "Présents : A. Leroy, M. Petit, S. Karim",
+          "Ordre du jour",
+          "1) Suivi consommations",
+          "2) Plan d'action 2026",
+          "Décision: valider le calendrier des audits.",
+          "",
+          "—"
+        ],
+        [
+          "1) Suivi consommations",
+          "Analyse des données : électricité -4%, gaz +2%.",
+          "Décision: lancer une campagne de sensibilisation.",
+          "2) Plan d'action 2026",
+          "Budget prévisionnel : 35 k€."
+        ],
+        [
+          "Actions",
+          "• Audit écoles (février)",
+          "• Réglage chaufferies (mars)",
+          "• Contrat maintenance (avril)",
+          "Décision: attribuer le lot 1 au prestataire X."
+        ],
+        [
+          "Annexe A — Participants",
+          "A. Leroy (élu), M. Petit (DSI), S. Karim (énergie)",
+          "Annexe B — Documents",
+          "• Relevés 2025",
+          "• Plan d'action 2026 v2"
+        ]
+      ]
+    }
+  }
+]
