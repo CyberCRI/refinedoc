@@ -33,7 +33,7 @@ def generate_weights(weight_len: int = 5) -> Generator:
     if weight_len >= 2:
         yield 0.75
     for _ in range(max(0, weight_len - 2)):
-        yield 0.5
+        yield 0.6
 
 
 def neutralize_arabic_numerals(input_str: str, neutral_representation: str = "@"):

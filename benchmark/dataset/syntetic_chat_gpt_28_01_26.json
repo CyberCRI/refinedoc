@@ -114,14 +114,14 @@
     "truth": {
       "headers": [
         ["A Lightweight Method for Header/Footer Removal in Native PDFs"],
-        ["A Lightweight Method for Header/Footer Removal in Native PDFs", "Introduction", "2"],
-        ["A Lightweight Method for Header/Footer Removal in Native PDFs", "Introduction", "3"],
-        ["A Lightweight Method for Header/Footer Removal in Native PDFs", "Methods", "4"],
-        ["A Lightweight Method for Header/Footer Removal in Native PDFs", "Methods", "5"],
-        ["A Lightweight Method for Header/Footer Removal in Native PDFs", "Results", "6"],
-        ["A Lightweight Method for Header/Footer Removal in Native PDFs", "Results", "7"],
-        ["A Lightweight Method for Header/Footer Removal in Native PDFs", "Discussion", "8"],
-        ["A Lightweight Method for Header/Footer Removal in Native PDFs", "References", "9"]
+        ["A Lightweight Method for Header/Footer Removal in Native PDFs", "2"],
+        ["A Lightweight Method for Header/Footer Removal in Native PDFs", "3"],
+        ["A Lightweight Method for Header/Footer Removal in Native PDFs", "4"],
+        ["A Lightweight Method for Header/Footer Removal in Native PDFs", "5"],
+        ["A Lightweight Method for Header/Footer Removal in Native PDFs", "6"],
+        ["A Lightweight Method for Header/Footer Removal in Native PDFs", "7"],
+        ["A Lightweight Method for Header/Footer Removal in Native PDFs", "8"],
+        ["A Lightweight Method for Header/Footer Removal in Native PDFs", "9"]
       ],
       "footers": [
         [],
@@ -544,11 +544,11 @@
     ],
     "truth": {
       "headers": [
-        [],
-        [],
-        [],
-        [],
-        []
+        ["Quarterly Business Review"],
+        ["Quarterly Business Review"],
+        ["Quarterly Business Review"],
+        ["Quarterly Business Review"],
+        ["Quarterly Business Review"]
       ],
       "footers": [
         ["Acme Corp — 2026-01-10", "1"],
