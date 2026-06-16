@@ -569,13 +569,12 @@ class TestRefinedDocument(TestCase):
         )
         self.assertListEqual(awaited_result, res)
 
-
-def test__identify_candidates_footer_too_much_candidates(self):
-    rd = RefinedDocument(content=self.big_document)
-    awaited_result = []
-    for p in self.big_document:
-        awaited_result.append(p[-5:])
-    res = rd._identify_candidates(
-        candidate_quantity=50, targeted_part=TargetedPart.FOOTER
-    )
-    self.assertListEqual(awaited_result, res)
+    def test__identify_candidates_footer_too_much_candidates(self):
+        rd = RefinedDocument(content=self.big_document)
+        awaited_result = []
+        for p in self.big_document:
+            awaited_result.append(p[-5:])
+        res = rd._identify_candidates(
+            candidate_quantity=50, targeted_part=TargetedPart.FOOTER
+        )
+        self.assertListEqual(awaited_result, res)

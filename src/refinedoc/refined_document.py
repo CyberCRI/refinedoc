@@ -8,7 +8,6 @@ from refinedoc.helpers import (
     generate_weights,
     neutralize_arabic_numerals,
     neutralize_roman_numerals,
-    unify_list_len,
 )
 
 logger = logging.getLogger(__name__)
@@ -190,23 +189,26 @@ class RefinedDocument:
         """
         detected = []
         for line_index, candidate in enumerate(candidates):
-            try:
-                to_compare_candidates = [x[line_index] for x in local_neighbours]
-                score = (
-                    self._compare_candidates(
-                        to_compare_candidates=to_compare_candidates,
-                        from_compare=candidate,
-                    )
-                    * positional_weights[line_index]
+            if line_index >= len(positional_weights):
+                logger.warning(
+                    f"Line index {line_index} is out of bounds for positional weights of length {len(positional_weights)}"
                 )
-            except IndexError:
-                if line_index >= len(positional_weights):
-                    logger.warning(
-                        f"Line index {line_index} is out of bounds for positional weights of length {len(positional_weights)}"
-                    )
+                score = 0
+            else:
+                # Compare only with neighbors that actually contain this line index.
+                to_compare_candidates = [
+                    x[line_index] for x in local_neighbours if line_index < len(x)
+                ]
+                if not to_compare_candidates:
                     score = 0
                 else:
-                    score = positional_weights[line_index] or 0
+                    score = (
+                        self._compare_candidates(
+                            to_compare_candidates=to_compare_candidates,
+                            from_compare=candidate,
+                        )
+                        * positional_weights[line_index]
+                    )
             if candidate and score >= 0.5:
                 detected.append(candidate)
         return detected
@@ -233,29 +235,22 @@ class RefinedDocument:
         pages = self._processed_body.copy()
 
         for page_index, candidates in enumerate(header_footer_candidates):
-            down_part = header_footer_candidates[
-                max(page_index - self.win, 0) : page_index
-            ]
-            upper_part = header_footer_candidates[
-                min(page_index + 1, len(header_footer_candidates)) : min(
-                    page_index + self.win, len(header_footer_candidates)
-                )
-            ]
-            local_neighbours = down_part + upper_part
+            local_neighbours = self._identify_local_neighbours(
+                header_footer_candidates, page_index
+            )
 
             # Align neighbor lengths so each index represents the same relative line.
             if not local_neighbours:
                 identified_headers_footers.append([])
                 continue
 
-            if targeted_part == TargetedPart.HEADER:
-                unify_list_len(local_neighbours)
-            elif targeted_part == TargetedPart.FOOTER:
-                unify_list_len(local_neighbours, at_top=True)
-            else:
-                raise NotImplementedError(UNSUPPORTED_TARGETED_PART_MSG)
+            standardized_size = max(
+                len(candidates), len(max(local_neighbours, key=len, default=[]))
+            )
 
-            standardized_size = len(max(local_neighbours, key=len))
+            # Pad neighbors to the same size as the local comparison window.
+            self._pad_neighbours(local_neighbours, standardized_size, targeted_part)
+
             header_weights = list(generate_weights(standardized_size))
 
             if targeted_part == TargetedPart.FOOTER:
@@ -278,6 +273,41 @@ class RefinedDocument:
             self._processed_footers = identified_headers_footers
         else:
             raise NotImplementedError(UNSUPPORTED_TARGETED_PART_MSG)
+
+    @staticmethod
+    def _pad_neighbours(
+        local_neighbours: list[list[str]],
+        standardized_size: int,
+        targeted_part: TargetedPart,
+    ):
+        for neighbour in local_neighbours:
+            deficit = standardized_size - len(neighbour)
+            if deficit <= 0:
+                continue
+            if targeted_part == TargetedPart.FOOTER:
+                neighbour[:0] = [""] * deficit
+            else:
+                neighbour.extend([""] * deficit)
+
+    def _identify_local_neighbours(
+        self, header_footer_candidates: list[list[str]], page_index: int
+    ) -> list[list[str]]:
+        """
+        Identify neighboring pages for local comparison.
+
+        :param header_footer_candidates: List of candidate lines to extract.
+        :param page_index: Page index for which to find neighbors.
+        :return: List of neighboring candidate lines.
+        :rtype: list[list[str]]
+        """
+        down_part = header_footer_candidates[max(page_index - self.win, 0) : page_index]
+        upper_part = header_footer_candidates[
+            min(page_index + 1, len(header_footer_candidates)) : min(
+                page_index + self.win, len(header_footer_candidates)
+            )
+        ]
+        local_neighbours = down_part + upper_part
+        return local_neighbours
 
     def _identify_candidates(
         self, candidate_quantity: int, targeted_part: TargetedPart

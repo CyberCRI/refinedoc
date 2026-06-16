@@ -2,29 +2,6 @@ import re
 from typing import Generator
 
 
-def unify_list_len(to_len_unified: list[list[str]], at_top: bool = False):
-    """
-    Normalize nested lists to the same length by padding with empty strings.
-
-    :param to_len_unified: Lists to normalize in place.
-    :type to_len_unified: list[list[str]]
-    :param at_top: If ``True``, pad at the beginning; otherwise pad at the end.
-    :type at_top: bool
-    :return: ``None``.
-    :rtype: None
-    """
-    maxlen = len(max(to_len_unified, key=len))
-
-    for sublist in to_len_unified:
-        place_holders = [""] * (maxlen - len(sublist))
-        if at_top:
-            # Preserve relative order of existing lines while padding from the top.
-            for place_holder in place_holders:
-                sublist.insert(0, place_holder)
-        else:
-            sublist.extend([""] * (maxlen - len(sublist)))
-
-
 def generate_weights(weight_len: int = 5) -> Generator[float | None, None, None]:
     """
     Generate weights for the header/footer detection algorithm.
