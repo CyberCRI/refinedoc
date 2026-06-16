@@ -189,9 +189,9 @@ class RefinedDocument:
                 local_neighbours=local_neighbours,
             )
 
-            pages[page_index] = [x for x in pages[page_index] if x not in detected]
-            identified_headers_footers.append(detected)
-        self._processed_body = pages
+        #     pages[page_index] = [x for x in pages[page_index] if x not in detected]
+        #     identified_headers_footers.append(detected)
+        # self._processed_body = pages
 
         if targeted_part == TargetedPart.HEADER:
             self._processed_headers = identified_headers_footers

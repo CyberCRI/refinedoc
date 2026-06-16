@@ -1,9 +1,62 @@
 from unittest import TestCase
 
+from refinedoc.enumeration import TargetedPart
 from refinedoc.refined_document import RefinedDocument
 
 
 class TestRefinedDocument(TestCase):
+
+    def setUp(self) -> None:
+        self.big_document = [
+            [
+                "header 1",
+                "subheader 1",
+                "lorem ipsum dolor sit amet",
+                "L'illustre Gobseck, au milieu des hommes les plus riches de Paris, se voyait souvent dans l'obligation d'accompagner à la table M. Derville, un vieux financier qui avait été son protecteur et qui avait eu le bonheur d'en devenir l'amant",
+                "Cette situation était bien plus embarrassante pour Gobseck qu'il ne l'avait jamais cru possible.",
+                "La comédie humaine, volume 3 : La Vieille Fille",
+                "consectetur adipiscing elit",
+                "Cette situation adipiscing",
+                "Random text",
+                "footer 1",
+            ],
+            [
+                "header 2",
+                "subheader 2",
+                "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                "Il y a beaucoup de temps que M. Pons, riche banquier de Bordeaux, avait été obligé d'envoyer à Paris son fils, jeune homme riche et élégant, mais sans éducation ni culture. Cependant, cette mauvaise éducation ne le rendait pas moins un esprit vif et une nature sensible.",
+                "Cette situation était bien plus embarrassante pour Gobseck qu'il ne l'avait jamais cru possible.",
+                "Very random text",
+                "Et ainsi naquit la lune",
+                "Strange random text",
+                "Ipsum lorea galat",
+                "footer 2",
+            ],
+            [
+                "header 3",
+                "subheader 3",
+                "ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+                "riche banquier de Bordeaux",
+                "nostrud exercitation ullamco laboris",
+                "ion ullamco laut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+                "ation ullamco laboris nisi ut arud exe",
+                "am quis nostrud exercitatioris nisi ut aliquip ex ea commodo consequat",
+                " ex ea commodo consequet",
+                "footer 3",
+            ],
+            [
+                "header 4",
+                "subheader 4",
+                "duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur",
+                "or in reprehenderit in vola",
+                "alea acta est",
+                "reprehenderit in voluptate velit esse cillum do",
+                "veni vidi vici",
+                "nostrud exercitation ulla",
+                "burutrud exercitavla la",
+                "footer 4",
+            ],
+        ]
 
     def test__compare(self):
         rd = RefinedDocument(content=[])
@@ -405,6 +458,22 @@ class TestRefinedDocument(TestCase):
         self.assertListEqual(f_dr, f_ref)
         self.assertListEqual(b_dr, b_ref)
 
+    def test_candidate_quantity_fallback_uses_page_line_count(self):
+        document = [[f"line {i}" for i in range(12)] for _ in range(20)]
+        document[0] = ["short 1", "short 2", "short 3"]
+
+        rd = RefinedDocument(content=document)
+
+        with self.assertLogs("refinedoc.refined_document", level="WARNING") as cm:
+            rd._separate_header_footer(TargetedPart.HEADER)
+
+        self.assertTrue(
+            any(
+                "Candidate quantity is too high for the document. Set to 2" in m
+                for m in cm.output
+            )
+        )
+
     def test_empty_document(self):
         document = []
 
@@ -458,3 +527,55 @@ class TestRefinedDocument(TestCase):
         self.assertListEqual(h_dr, h_ref)
         self.assertListEqual(f_dr, f_ref)
         self.assertListEqual(b_dr, b_ref)
+
+    def test__identify_candidates_header_simple_success(self):
+        rd = RefinedDocument(content=self.big_document)
+        awaited_result = []
+        for p in self.big_document:
+            awaited_result.append(p[:5])
+        res = rd._identify_candidates(
+            candidate_quantity=5, targeted_part=TargetedPart.HEADER
+        )
+
+        self.assertListEqual(awaited_result, res)
+
+    def test__identify_candidates_header_too_much_candidates(self):
+        rd = RefinedDocument(content=self.big_document)
+        awaited_result = []
+        for p in self.big_document:
+            awaited_result.append(p[:5])
+        res = rd._identify_candidates(
+            candidate_quantity=50, targeted_part=TargetedPart.HEADER
+        )
+
+        self.assertListEqual(awaited_result, res)
+
+    def test__identify_candidates_header_empty_page(self):
+        local_big_document = self.big_document
+        local_big_document[1] = []
+        rd = RefinedDocument(content=self.big_document)
+        res = rd._identify_candidates(
+            candidate_quantity=5, targeted_part=TargetedPart.HEADER
+        )
+        self.assertEqual([], res[1])
+
+    def test__identify_candidates_footer_simple_success(self):
+        rd = RefinedDocument(content=self.big_document)
+        awaited_result = []
+        for p in self.big_document:
+            awaited_result.append(p[-5:])
+        res = rd._identify_candidates(
+            candidate_quantity=5, targeted_part=TargetedPart.FOOTER
+        )
+        self.assertListEqual(awaited_result, res)
+
+
+def test__identify_candidates_footer_too_much_candidates(self):
+    rd = RefinedDocument(content=self.big_document)
+    awaited_result = []
+    for p in self.big_document:
+        awaited_result.append(p[-5:])
+    res = rd._identify_candidates(
+        candidate_quantity=50, targeted_part=TargetedPart.FOOTER
+    )
+    self.assertListEqual(awaited_result, res)
