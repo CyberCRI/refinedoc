@@ -2,6 +2,7 @@ import logging
 from collections import namedtuple
 from difflib import SequenceMatcher
 from statistics import mean
+from typing import Any
 
 from refinedoc.enumeration import TargetedPart
 from refinedoc.helpers import (
@@ -142,7 +143,7 @@ class RefinedDocument:
                     )
                     score = 0
                 else:
-                    score = positional_weights[line_index]
+                    score = positional_weights[line_index] or 0
             if candidate and score >= 0.5:
                 detected.append(candidate)
         return detected
@@ -151,21 +152,9 @@ class RefinedDocument:
         self, targeted_part: TargetedPart, candidate_quantity: int = 5
     ):
 
-        pages: list[list[str]] = self._processed_body
-        header_footer_candidates = []
-
-        for page_content in pages:
-            if len(page_content) < candidate_quantity * 2:
-                candidate_quantity = len(self._processed_body) // 2
-                logger.warning(
-                    f"Candidate quantity is too high for the document. Set to {candidate_quantity}"
-                )
-            if targeted_part == TargetedPart.HEADER:
-                header_footer_candidates.append(page_content[:candidate_quantity])
-            elif targeted_part == TargetedPart.FOOTER:
-                header_footer_candidates.append(page_content[-candidate_quantity:])
-            else:
-                raise NotImplemented("Value used for targeted part is not usable here")
+        header_footer_candidates = self._identify_candidates(
+            candidate_quantity, targeted_part
+        )
 
         identified_headers_footers: list[list[str]] = []
 
@@ -210,6 +199,38 @@ class RefinedDocument:
             self._processed_footers = identified_headers_footers
         else:
             raise NotImplemented("Value used for targeted part is not usable here")
+
+    def _identify_candidates(
+        self, candidate_quantity: int, targeted_part: TargetedPart
+    ) -> list[list[str]]:
+        header_footer_candidates = []
+
+        for page_content in self._processed_body:
+            effective_candidate_quantity = candidate_quantity
+            if len(page_content) < effective_candidate_quantity * 2:
+                effective_candidate_quantity = (
+                    (len(page_content) + 1) // 2 if page_content else 0
+                )
+                logger.warning(
+                    f"Candidate quantity is too high for the document. Set to {effective_candidate_quantity}"
+                )
+
+            if effective_candidate_quantity == 0:
+                logger.warning("A page is empty, no header or footer can be identified")
+                header_footer_candidates.append([])
+                continue
+
+            if targeted_part == TargetedPart.HEADER:
+                header_footer_candidates.append(
+                    page_content[:effective_candidate_quantity]
+                )
+            elif targeted_part == TargetedPart.FOOTER:
+                header_footer_candidates.append(
+                    page_content[-effective_candidate_quantity:]
+                )
+            else:
+                raise NotImplemented("Value used for targeted part is not usable here")
+        return header_footer_candidates
 
     def __len__(self) -> int:
         """
