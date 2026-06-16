@@ -2,7 +2,6 @@ import logging
 from collections import namedtuple
 from difflib import SequenceMatcher
 from statistics import mean
-from typing import Any
 
 from refinedoc.enumeration import TargetedPart
 from refinedoc.helpers import (
@@ -13,6 +12,7 @@ from refinedoc.helpers import (
 )
 
 logger = logging.getLogger(__name__)
+UNSUPPORTED_TARGETED_PART_MSG = "Value used for targeted part is not usable here"
 
 RefinedDocumentContent = namedtuple(
     "RefinedDocumentContent", ["body", "headers", "footers"]
@@ -253,12 +253,10 @@ class RefinedDocument:
             elif targeted_part == TargetedPart.FOOTER:
                 unify_list_len(local_neighbours, at_top=True)
             else:
-                raise NotImplementedError(
-                    "Value used for targeted part is not usable here"
-                )
+                raise NotImplementedError(UNSUPPORTED_TARGETED_PART_MSG)
 
             standardized_size = len(max(local_neighbours, key=len))
-            header_weights = [w for w in generate_weights(standardized_size)]
+            header_weights = list(generate_weights(standardized_size))
 
             if targeted_part == TargetedPart.FOOTER:
                 # Inverse weight for footers
@@ -279,7 +277,7 @@ class RefinedDocument:
         elif targeted_part == TargetedPart.FOOTER:
             self._processed_footers = identified_headers_footers
         else:
-            raise NotImplementedError("Value used for targeted part is not usable here")
+            raise NotImplementedError(UNSUPPORTED_TARGETED_PART_MSG)
 
     def _identify_candidates(
         self, candidate_quantity: int, targeted_part: TargetedPart
@@ -320,9 +318,7 @@ class RefinedDocument:
                     page_content[-effective_candidate_quantity:]
                 )
             else:
-                raise NotImplementedError(
-                    "Value used for targeted part is not usable here"
-                )
+                raise NotImplementedError(UNSUPPORTED_TARGETED_PART_MSG)
         return header_footer_candidates
 
     def __len__(self) -> int:
