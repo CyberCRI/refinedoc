@@ -4,23 +4,28 @@ from typing import Generator
 
 def unify_list_len(to_len_unified: list[list[str]], at_top: bool = False):
     """
-    Unify the length of lists in a list of lists by adding empty strings to the shorter lists.
-    :param to_len_unified: list of lists to be unified
-    :param at_top: if True, add empty strings at the beginning of the lists; if False, add at the end
-    :return: None
+    Normalize nested lists to the same length by padding with empty strings.
+
+    :param to_len_unified: Lists to normalize in place.
+    :type to_len_unified: list[list[str]]
+    :param at_top: If ``True``, pad at the beginning; otherwise pad at the end.
+    :type at_top: bool
+    :return: ``None``.
+    :rtype: None
     """
     maxlen = len(max(to_len_unified, key=len))
 
     for sublist in to_len_unified:
         place_holders = [""] * (maxlen - len(sublist))
         if at_top:
+            # Preserve relative order of existing lines while padding from the top.
             for place_holder in place_holders:
                 sublist.insert(0, place_holder)
         else:
             sublist.extend([""] * (maxlen - len(sublist)))
 
 
-def generate_weights(weight_len: int = 5) -> Generator:
+def generate_weights(weight_len: int = 5) -> Generator[float | None, None, None]:
     """
     Generate weights for the header/footer detection algorithm.
     :param weight_len: length of the weights list
@@ -36,7 +41,9 @@ def generate_weights(weight_len: int = 5) -> Generator:
         yield 0.5
 
 
-def neutralize_arabic_numerals(input_str: str, neutral_representation: str = "@"):
+def neutralize_arabic_numerals(
+    input_str: str, neutral_representation: str = "@"
+) -> str:
     """
     Replace Arabic numerals in a string with neutral representation.
     :param input_str: the input string containing Arabic numerals
@@ -49,7 +56,7 @@ def neutralize_arabic_numerals(input_str: str, neutral_representation: str = "@"
     return ret
 
 
-def neutralize_roman_numerals(input_str: str, neutral_representation: str = "@"):
+def neutralize_roman_numerals(input_str: str, neutral_representation: str = "@") -> str:
     """
     Replace Roman numerals in a string with neutral representation.
     :param input_str: the input string containing Roman numerals
